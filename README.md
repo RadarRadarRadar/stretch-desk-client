@@ -17,7 +17,7 @@
 
   CRUD
   - As a user I want to: View all the stretches (Index)
-  - As a user I want to: View stretches by catagories (Show/Filter)
+  - As a user I want to: View stretches by categories (Show/Filter)
   - As a user I want to: View stretches I added (Show/Filter)
   - As a user I want to: Add a stretch YouTube link or instructions (Create)
   - As a user I want to: Update a stretch I own (Update)
@@ -41,5 +41,3 @@
 # Plan, Process, Problem-Solving
 
 # WireFrames
-
-# ERDs

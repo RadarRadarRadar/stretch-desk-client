@@ -10,6 +10,11 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
+import StretchAdd from './components/StretchAdd/StretchAdd'
+import StretchIndex from './components/StretchIndex/StretchIndex'
+import StretchShow from './components/StretchShow/StretchShow'
+import StretchUpdate from './components/StretchUpdate/StretchUpdate'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -64,6 +69,18 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/add-stretch' render={() => (
+            <StretchAdd user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/stretches' render={() => (
+            <StretchIndex user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/stretches/:id' render={() => (
+            <StretchShow user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/stretch/update/:id' render={() => (
+            <StretchUpdate user={user} />
           )} />
         </main>
       </Fragment>

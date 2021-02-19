@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { stretchIndex } from '../../api/stretch'
+import { stretchMyIndex } from '../../api/stretch'
 import Spinner from 'react-bootstrap/Spinner'
 
 import Stretch from '../Stretch/Stretch'
 
-class StretchIndex extends Component {
+class StretchMyIndex extends Component {
   constructor (props) {
     super(props)
 
@@ -18,7 +18,7 @@ class StretchIndex extends Component {
   componentDidMount () {
     const { user } = this.props
 
-    stretchIndex(user)
+    stretchMyIndex(user)
       // .then(res => console.log(res))
       .then(res => this.setState({ stretches: res.data.stretches }))
   }
@@ -42,4 +42,4 @@ class StretchIndex extends Component {
   }
 }
 
-export default withRouter(StretchIndex)
+export default withRouter(StretchMyIndex)

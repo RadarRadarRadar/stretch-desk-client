@@ -11,6 +11,16 @@ export const stretchIndex = (user) => {
   })
 }
 
+export const stretchMyIndex = (user) => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/mystretches/',
+    headers: {
+      'Authorization': `Token ${user.token}`
+    }
+  })
+}
+
 export const stretchShow = (id, user) => {
   return axios({
     method: 'GET',
@@ -53,6 +63,16 @@ export const stretchUpdate = (stretch, id, user) => {
         video: stretch.video,
         instructions: stretch.instructions
       }
+    }
+  })
+}
+
+export const stretchDelete = (id, user) => {
+  return axios({
+    method: 'DELETE',
+    url: apiUrl + '/stretch/' + id + '/',
+    headers: {
+      'Authorization': `Token ${user.token}`
     }
   })
 }

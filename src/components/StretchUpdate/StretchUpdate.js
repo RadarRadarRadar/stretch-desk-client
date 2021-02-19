@@ -38,9 +38,10 @@ class StretchUpdate extends Component {
 
   render () {
     const { name, description, video, instructions, updated } = this.state
+    const { match } = this.props
 
     if (updated) {
-      return <Redirect to='/stretches'/>
+      return <Redirect to={`/stretches/${match.params.id}`}/>
     }
     return (
       <div className="row">

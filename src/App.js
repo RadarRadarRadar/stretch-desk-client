@@ -12,8 +12,10 @@ import ChangePassword from './components/ChangePassword/ChangePassword'
 
 import StretchAdd from './components/StretchAdd/StretchAdd'
 import StretchIndex from './components/StretchIndex/StretchIndex'
+import StretchMyIndex from './components/StretchMyIndex/StretchMyIndex'
 import StretchShow from './components/StretchShow/StretchShow'
 import StretchUpdate from './components/StretchUpdate/StretchUpdate'
+import StretchDelete from './components/StretchDelete/StretchDelete'
 
 class App extends Component {
   constructor (props) {
@@ -81,6 +83,12 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/stretch/update/:id' render={() => (
             <StretchUpdate user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/stretch/delete/:id' render={() => (
+            <StretchDelete user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/mystretches' render={() => (
+            <StretchMyIndex user={user} />
           )} />
         </main>
       </Fragment>

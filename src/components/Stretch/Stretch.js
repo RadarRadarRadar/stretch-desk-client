@@ -12,9 +12,26 @@ class Stretch extends Component {
   }
 
   render () {
-    const { stretch } = this.props
+    const { stretch, user } = this.props
+    const ownerOptions = (
+      <Fragment>
+        <Link to={`/stretch/update/${stretch.id}`}>
+          <Button variant="primary">Update</Button>
+        </Link>
+        <Link to={`/stretch/delete/${stretch.id}`}>
+          <Button variant="primary">Delete</Button>
+        </Link>
+      </Fragment>
+    )
+    const ownerCheck = function () {
+      if (stretch.owner === user.id) {
+        return ownerOptions
+      }
+    }
     return (
       <Fragment>
+        {console.log(stretch)}
+        {console.log(user)}
         <Card>
           <Card.Header as="h5">
             <Link to={`/stretches/${stretch.id}`}>
@@ -26,22 +43,12 @@ class Stretch extends Component {
             <Card.Text>
               {stretch.instructions}
             </Card.Text>
-            <Link to={`/stretch/update/${stretch.id}`}>
-              <Button variant="primary">Update</Button>
-            </Link>
+            {ownerCheck()}
           </Card.Body>
         </Card>
       </Fragment>
     )
   }
 }
-
-// <div>---</div>
-// <div>{stretch.name}</div>
-// <div>{stretch.description}</div>
-// <div>{stretch.video}</div>
-// <div>{stretch.instructions}</div>
-// <div>{stretch.id}</div>
-// <div>---</div>
 
 export default Stretch

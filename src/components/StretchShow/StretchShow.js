@@ -24,6 +24,7 @@ class StretchShow extends Component {
 
   render () {
     const { stretch } = this.state
+    const { user } = this.props
     if (!stretch) {
       return (
         <Spinner animation="border" role="status">
@@ -32,7 +33,7 @@ class StretchShow extends Component {
       )
     }
 
-    const stretchShowJsx = <Stretch stretch={stretch}/>
+    const stretchShowJsx = <Stretch stretch={stretch} user={user}/>
 
     return (
       <Fragment>

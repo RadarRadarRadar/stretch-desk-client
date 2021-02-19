@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-// import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
@@ -25,15 +25,26 @@ class Stretch extends Component {
         </Link>
       </Fragment>
     )
+
+    const videoDisplay = (
+      <ResponsivePlayer url={stretch.video}/>
+    )
+
     const ownerCheck = function () {
       if (stretch.owner === user.id) {
         return ownerOptions
       }
     }
+    const videoCheck = function (video) {
+      if (ReactPlayer.canPlay(video)) {
+        return videoDisplay
+      } else {
+        return 'Video link does not work.'
+      }
+    }
+
     return (
       <Fragment>
-        {console.log(stretch)}
-        {console.log(user)}
         <Card>
           <Card.Header as="h5">
             <Link to={`/stretches/${stretch.id}`}>
@@ -42,7 +53,7 @@ class Stretch extends Component {
           </Card.Header>
           <Card.Body>
             <Card.Title>{stretch.description}</Card.Title>
-            <ResponsivePlayer url={stretch.video}/>
+            {videoCheck(stretch.video)}
             <Card.Text>
               {stretch.instructions}
             </Card.Text>

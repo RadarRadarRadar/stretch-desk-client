@@ -73,22 +73,22 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/add-stretch' render={() => (
-            <StretchAdd user={user} />
+            <StretchAdd msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/stretches' render={() => (
-            <StretchIndex user={user} />
+            <StretchIndex msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/stretches/:id' render={() => (
-            <StretchShow user={user} />
+            <StretchShow msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/stretch/update/:id' render={() => (
-            <StretchUpdate user={user} />
+            <StretchUpdate msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/stretch/delete/:id' render={() => (
-            <StretchDelete user={user} />
+            <StretchDelete msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/mystretches' render={() => (
-            <StretchMyIndex user={user} />
+            <StretchMyIndex msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>

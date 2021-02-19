@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { stretchIndex } from '../../api/stretch'
+import messages from '../AutoDismissAlert/messages'
 import Spinner from 'react-bootstrap/Spinner'
 
 import Stretch from '../Stretch/Stretch'
@@ -16,11 +17,24 @@ class StretchIndex extends Component {
   }
 
   componentDidMount () {
-    const { user } = this.props
+    const { msgAlert, user } = this.props
 
     stretchIndex(user)
       // .then(res => console.log(res))
       .then(res => this.setState({ stretches: res.data.stretches }))
+      .then(() => msgAlert({
+        heading: 'Index Success',
+        message: messages.indexStretchesSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        this.setState({ stretches: null })
+        msgAlert({
+          heading: 'Index Failed with error: ' + error.message,
+          message: messages.indexStretchesFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

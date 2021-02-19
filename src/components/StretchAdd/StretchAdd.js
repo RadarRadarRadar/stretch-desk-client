@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 import { stretchAdd } from '../../api/stretch'
-
+import messages from '../AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -14,7 +14,8 @@ class StretchAdd extends Component {
       name: '',
       description: '',
       video: '',
-      instructions: ''
+      instructions: '',
+      added: false
     }
   }
 
@@ -24,17 +25,30 @@ class StretchAdd extends Component {
 
   onStretchAdd = event => {
     event.preventDefault()
-    const { user } = this.props
-    console.log(user)
+    const { msgAlert, user } = this.props
 
     stretchAdd(this.state, user)
-      .then(console.log('Success'))
-      .catch(error => console.error(error))
+      .then(this.setState({ added: true }))
+      .then(() => msgAlert({
+        heading: 'Add Success',
+        message: messages.addStretchSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        this.setState({ stretches: null })
+        msgAlert({
+          heading: 'Add Failed with error: ' + error.message,
+          message: messages.addStretchFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {
-    const { name, description, video, instructions } = this.state
-
+    const { name, description, video, instructions, added } = this.state
+    if (added) {
+      return <Redirect to='/stretches'/>
+    }
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">

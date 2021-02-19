@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react'
+// import ReactPlayer from 'react-player'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
+import ResponsivePlayer from '../ResponsivePlayer/ResponsivePlayer'
 
 class Stretch extends Component {
   constructor (props) {
@@ -19,7 +21,7 @@ class Stretch extends Component {
           <Button variant="primary">Update</Button>
         </Link>
         <Link to={`/stretch/delete/${stretch.id}`}>
-          <Button variant="primary">Delete</Button>
+          <Button variant="danger">Delete</Button>
         </Link>
       </Fragment>
     )
@@ -40,6 +42,7 @@ class Stretch extends Component {
           </Card.Header>
           <Card.Body>
             <Card.Title>{stretch.description}</Card.Title>
+            <ResponsivePlayer url={stretch.video}/>
             <Card.Text>
               {stretch.instructions}
             </Card.Text>

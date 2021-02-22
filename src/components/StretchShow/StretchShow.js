@@ -36,6 +36,10 @@ class StretchShow extends Component {
       })
   }
 
+  componentWillUnmount () {
+    this.setState({ stretch: null })
+  }
+
   render () {
     const { stretch } = this.state
     const { user } = this.props

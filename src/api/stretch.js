@@ -57,12 +57,7 @@ export const stretchUpdate = (stretch, id, user) => {
       'Authorization': `Token ${user.token}`
     },
     data: {
-      stretch: {
-        name: stretch.name,
-        description: stretch.description,
-        video: stretch.video,
-        instructions: stretch.instructions
-      }
+      stretch: stretch
     }
   })
 }

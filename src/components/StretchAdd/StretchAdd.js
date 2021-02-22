@@ -15,7 +15,7 @@ class StretchAdd extends Component {
       description: '',
       video: '',
       instructions: '',
-      added: false
+      createdId: null
     }
   }
 
@@ -28,12 +28,15 @@ class StretchAdd extends Component {
     const { msgAlert, user } = this.props
 
     stretchAdd(this.state, user)
-      .then(this.setState({ added: true }))
-      .then(() => msgAlert({
-        heading: 'Add Success',
-        message: messages.addStretchSuccess,
-        variant: 'success'
-      }))
+      .then((res) => {
+        msgAlert({
+          heading: 'Add Success',
+          message: messages.addStretchSuccess,
+          variant: 'success'
+        })
+        return res
+      })
+      .then((res) => this.setState({ createdId: res.data.stretch.id }))
       .catch(error => {
         this.setState({ stretches: null })
         msgAlert({
@@ -45,9 +48,9 @@ class StretchAdd extends Component {
   }
 
   render () {
-    const { name, description, video, instructions, added } = this.state
-    if (added) {
-      return <Redirect to='/stretches'/>
+    const { name, description, video, instructions, createdId } = this.state
+    if (createdId) {
+      return <Redirect to={`/stretches/${createdId}`}/>
     }
     return (
       <div className="row">

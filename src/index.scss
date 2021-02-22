@@ -1,1 +1,11 @@
+$primary: #1B4965;
+$secondary: #CAE9FF;
+$info: #5FA8D3;
+$success: #BEE9E8;
 @import '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #CAE9FF;
+  height: 100%;
+  width: 100%;
+}

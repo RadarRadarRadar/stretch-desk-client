@@ -37,6 +37,10 @@ class StretchIndex extends Component {
       })
   }
 
+  componentWillUnmount () {
+    this.setState({ stretches: null })
+  }
+
   render () {
     const { stretches } = this.state
     const { user } = this.props

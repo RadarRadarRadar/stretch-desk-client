@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { stretchShow } from '../../api/stretch'
+import messages from '../AutoDismissAlert/messages'
 
 import Spinner from 'react-bootstrap/Spinner'
 
@@ -17,9 +18,22 @@ class StretchShow extends Component {
   }
 
   componentDidMount () {
-    const { match, user } = this.props
+    const { msgAlert, match, user } = this.props
     stretchShow(match.params.id, user)
       .then(res => this.setState({ stretch: res.data.stretch }))
+      .then(() => msgAlert({
+        heading: 'Show Success',
+        message: messages.showStretchSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        this.setState({ stretch: null })
+        msgAlert({
+          heading: 'Show Failed with error: ' + error.message,
+          message: messages.showStretchFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

@@ -17,12 +17,14 @@ class Stretch extends Component {
     const { stretch, user } = this.props
     const ownerOptions = (
       <Fragment>
-        <Link to={`/stretch/update/${stretch.id}`}>
-          <Button variant="primary">Update</Button>
-        </Link>
-        <Link to={`/stretch/delete/${stretch.id}`}>
-          <Button variant="danger">Delete</Button>
-        </Link>
+        <div style={{ alignContent: 'flex-end', display: 'flex', justifyContent: 'flex-end' }}>
+          <Link to={`/stretch/update/${stretch.id}`}>
+            <Button variant="primary">Update</Button>
+          </Link>
+          <Link to={`/stretch/delete/${stretch.id}`}>
+            <Button variant="danger">Delete</Button>
+          </Link>
+        </div>
       </Fragment>
     )
 
@@ -45,21 +47,23 @@ class Stretch extends Component {
 
     return (
       <Fragment>
-        <Card>
-          <Card.Header as="h5">
-            <Link to={`/stretches/${stretch.id}`}>
-              {stretch.name}
-            </Link>
-          </Card.Header>
-          <Card.Body>
-            <Card.Title>{stretch.description}</Card.Title>
-            {videoCheck(stretch.video)}
-            <Card.Text>
-              {stretch.instructions}
-            </Card.Text>
-            {ownerCheck()}
-          </Card.Body>
-        </Card>
+        <div className='col-10 mx-auto mt-3'>
+          <Card style={{ border: '1px solid #000' }}>
+            <Card.Header as="h5" style={{ backgroundColor: '#5FA8D3' }}>
+              <Link variant="dark" to={`/stretches/${stretch.id}`}>
+                {stretch.name}
+              </Link>
+            </Card.Header>
+            <Card.Body style={{ backgroundColor: '#CAE9FF' }}>
+              <Card.Title>{stretch.description}</Card.Title>
+              {videoCheck(stretch.video)}
+              <Card.Text>
+                {stretch.instructions}
+              </Card.Text>
+              {ownerCheck()}
+            </Card.Body>
+          </Card>
+        </div>
       </Fragment>
     )
   }

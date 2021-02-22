@@ -4,49 +4,62 @@ import { withRouter, Redirect } from 'react-router-dom'
 import { stretchUpdate } from '../../api/stretch'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import messages from '../AutoDismissAlert/messages'
 
 class StretchUpdate extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      name: '',
-      description: '',
-      video: '',
-      instructions: '',
-      updated: false
+      updatedId: null
     }
   }
-
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
 
+  redirectToAdded = event => {
+    const { match } = this.props
+    const redirect = () => <Redirect to={`/stretches/${match.params.id}`}/>
+    setTimeout(() => {
+      redirect()
+    }, 1000)
+  }
+
   onStretchUpdate = event => {
     event.preventDefault()
-    const { match, user } = this.props
+    const { msgAlert, match, user } = this.props
     console.log(user)
+    console.log(this.state)
 
     stretchUpdate(this.state, match.params.id, user)
-      .then(res => {
-        this.setState({ updated: true })
-        return res
+      .then(() => msgAlert({
+        heading: 'Update Success',
+        message: messages.updateStretchSuccess,
+        variant: 'success'
+      }))
+      .then(this.setState({ updatedId: match.params.id }))
+      .catch(error => {
+        this.setState({ stretch: null })
+        msgAlert({
+          heading: 'Update Failed with error: ' + error.message,
+          message: messages.updateStretchFailure,
+          variant: 'danger'
+        })
       })
-      .then(console.log('Success'))
-      .catch(error => console.error(error))
   }
 
   render () {
-    const { name, description, video, instructions, updated } = this.state
-    const { match } = this.props
+    const { name, description, video, instructions, updatedId } = this.state
+    // const { match } = this.props
 
-    if (updated) {
-      return <Redirect to={`/stretches/${match.params.id}`}/>
+    if (updatedId) {
+      return <Redirect to={`/stretches/${updatedId}`}/>
     }
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Add a Stretch</h3>
+          <h3>Update a Stretch</h3>
           <Form onSubmit={this.onStretchUpdate}>
             <Form.Group controlId="stretchName">
               <Form.Label>Name</Form.Label>
